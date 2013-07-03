@@ -13,22 +13,26 @@ def parse_cmd_line():
   return options.parse_args()
 
 def setup_logging(level, stream = True, filename = None):
-  logformat = "%(asctime)s %(levelname)s %(message)s" 
+  logformat = "%(asctime)s %(name)s %(levelname)s %(message)s"
   formatter = logging.Formatter(logformat)
 
-  logging.getLogger().removeHandler(logging.StreamHandler())
+  for h in logging.getLogger('PP').handlers:
+    logging.getLogger('PP').removeHandler(h)
 
   if stream:
-    logging.getLogger().setLevel(level)
+    logging.getLogger('PP').setLevel(level)
+    logging.getLogger('PP').propagate = False
 
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setFormatter(formatter)
-    logging.getLogger().addHandler(handler)
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    stdout_handler.setFormatter(formatter)
+
+    logging.getLogger('PP').addHandler(stdout_handler)
 
   if filename:
-    logging.getLogger().removeHandler(logging.FileHandler(filename))
-    logging.getLogger().setLevel(level)
+    logging.getLogger('PP').removeHandler(logging.FileHandler(filename))
+    logging.getLogger('PP').setLevel(level)
+    logging.getLogger('PP').propagate = False
 
     handler = logging.FileHandler(filename)
     handler.setFormatter(formatter)
-    logging.getLogger().addHandler(handler)
+    logging.getLogger('PP').addHandler(handler)

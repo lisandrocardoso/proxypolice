@@ -10,15 +10,15 @@ from lib import pidmanager
 from pprint import pprint
 
 if __name__ == '__main__':
-  utils.setup_logging(logging.INFO, stream = True)
+  utils.setup_logging(logging.DEBUG, stream = True)
 
-  logging.info("INFO CHE")
-  logging.debug("DEBUG CHE")
-  logging.error("ERROR CHE")
+  logging.getLogger('PP').debug("DEBUG CHE")
+  logging.getLogger('PP').info("INFO CHE")
+  logging.getLogger('PP').error("ERROR CHE")
    
   utils.setup_logging(logging.INFO, stream = False, filename = 'log')
 
-  logging.info("INFO2CHE")
-  logging.debug("DEBUG2CHE")
-  logging.error("ERROR2CHE")
+  logging.getLogger('PP').info("INFO2CHE")
+  logging.getLogger('PP').debug("DEBUG2CHE")
+  logging.getLogger('PP').error("ERROR2CHE")
  
