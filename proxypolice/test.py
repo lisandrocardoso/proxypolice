@@ -9,16 +9,23 @@ from lib import pidmanager
 
 from pprint import pprint
 
+import requests
+
 if __name__ == '__main__':
-  utils.setup_logging(logging.DEBUG, stream = True)
+  timeout = 5
+  #proxy = { 'http' : 'http://proxy.corp.globant.com:3128'}
+  proxy={}
 
-  logging.getLogger('PP').debug("DEBUG CHE")
-  logging.getLogger('PP').info("INFO CHE")
-  logging.getLogger('PP').error("ERROR CHE")
-   
-  utils.setup_logging(logging.INFO, stream = False, filename = 'log')
+  r = requests.get('http://www.canalla.com', timeout=timeout, proxies=proxy)
 
-  logging.getLogger('PP').info("INFO2CHE")
-  logging.getLogger('PP').debug("DEBUG2CHE")
-  logging.getLogger('PP').error("ERROR2CHE")
- 
+  pprint(dir(r))
+
+  print r.elapsed
+  print r.connection
+  print r.status_code
+  print r.url
+  print r.json
+  print r.headers
+  #print r.text
+
+

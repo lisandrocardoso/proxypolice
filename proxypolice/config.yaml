@@ -9,8 +9,8 @@ poller_proxy_url: proxy.corp.globant.com
 poller_proxy_port: 3128
 
 poller_urls:
-  - www.globant.com
-  - www.lanacion.com.ar
-  - mail.google.com
+  - http://www.globant.com
+  - http://www.lanacion.com.ar
+  - http://mail.google.com
 
 log_file: proxypolice_{:%Y%d%m}.log
